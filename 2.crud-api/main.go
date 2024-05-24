@@ -41,9 +41,13 @@ func getMovies(w http.ResponseWriter, r *http.Request){
 	json.NewEncoder(w).Encode(movie)
 }
 
-func createMovie(){
+func createMovie(w http.ResponseWriter, r *http.Request){
 	w.Header().Set("Content-type", "application/json")
-	
+	var m Movie
+	_ = json.NewDecoder(r.Body).Decode(&m)
+	movie = append(movie, m)
+	fmt.Println(movie)
+	json.NewEncoder(w).Encode(m)
 	
 }
 
